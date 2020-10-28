@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (SysCar)表控制层
@@ -32,6 +33,11 @@ public class SysCarController {
     @GetMapping("selectOne")
     public SysCar selectOne(Integer id) {
         return this.sysCarService.queryById(id);
+    }
+
+    @GetMapping("selectAll")
+    public List<SysCar> selectAll(SysCar sysCar){
+        return this.sysCarService.queryAll(sysCar);
     }
 
 }
