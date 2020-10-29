@@ -5,6 +5,8 @@ import com.ali.service.SysCityService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -23,31 +25,27 @@ public class SysCityController {
     @Resource
     private SysCityService sysCityService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
+
     @GetMapping("selectOne")
-    public SysCity selectOne(Integer id) {
-        return this.sysCityService.queryById(id);
+    public HashMap<String,Object> selectOne(Integer getid,Integer backid) {
+        HashMap<String,Object> map = new HashMap<String, Object>();
+
+        List<SysCity> list = new ArrayList<SysCity>();
+
+
+        list.add(this.sysCityService.queryById(getid));
+        list.add(this.sysCityService.queryById(backid));
+
+        map.put("code", 0);
+        map.put("count", 1000);
+        map.put("msg", "");
+        map.put("data", list);
+
+        return map;
     }
 
-    @GetMapping("queryCart")
-    public List<SysCity> queryCart() {
-        return this.sysCityService.queryCart();
-    }
-
-    @GetMapping("queryCartByPid")
-    public List<SysCity> queryCartByPid(int cityid) {
-        System.out.println("111111111111111");
-        System.out.println(cityid);
-        return this.sysCityService.queryCartByPid(cityid);
-    }
-
-    @GetMapping("queryCartAddressByCityid")
-    public List<SysCity> queryCartAddressByCityid(int cityid) {
-        return this.sysCityService.queryCartAddressByCityid(cityid);
+    @PostMapping("selectAll")
+    public List<SysCity> selectAll(SysCity sysCity){
+        return this.sysCityService.queryAll(sysCity);
     }
 }

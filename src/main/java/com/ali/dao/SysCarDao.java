@@ -13,6 +13,9 @@ import java.util.List;
  */
 public interface SysCarDao {
 
+    List<SysCar> ascCar();
+    List<SysCar> descCar();
+
     /**
      * 通过ID查询单条数据
      *

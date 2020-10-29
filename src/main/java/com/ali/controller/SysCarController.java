@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (SysCar)表控制层
@@ -27,12 +29,22 @@ public class SysCarController {
     /**
      * 通过主键查询单条数据
      *
-     * @param id 主键
+     * @param cid 主键
      * @return 单条数据
      */
     @GetMapping("selectOne")
-    public SysCar selectOne(Integer id) {
-        return this.sysCarService.queryById(id);
+    public SysCar selectOne(Integer cid) {
+
+//        SysCar sysCar = sysCarService.queryById(cid);
+//
+//        Map<String,Object> map = new HashMap<String,Object>();
+//
+//        map.put("code", 0);
+//        map.put("count", 1000);
+//        map.put("msg", "");
+//        map.put("data", sysCar);
+
+        return this.sysCarService.queryById(cid);
     }
 
     @GetMapping("selectAll")
@@ -40,4 +52,13 @@ public class SysCarController {
         return this.sysCarService.queryAll(sysCar);
     }
 
+    @GetMapping("ascCar")
+    public List<SysCar> ascCar(){
+        return this.sysCarService.ascCar();
+    }
+
+    @GetMapping("descCar")
+    public List<SysCar> descCar(){
+        return this.sysCarService.descCar();
+    }
 }

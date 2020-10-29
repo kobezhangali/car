@@ -24,6 +24,16 @@ public class SysCarServiceImpl implements SysCarService {
         return this.sysCarDao.queryAll(sysCar);
     }
 
+    @Override
+    public List<SysCar> ascCar() {
+        return this.sysCarDao.ascCar();
+    }
+
+    @Override
+    public List<SysCar> descCar() {
+        return this.sysCarDao.descCar();
+    }
+
     /**
      * 通过ID查询单条数据
      *

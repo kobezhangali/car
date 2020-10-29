@@ -13,6 +13,9 @@ import java.util.List;
 public interface SysCarService {
 
     List<SysCar> queryAll(SysCar sysCar);
+    List<SysCar> ascCar();
+    List<SysCar> descCar();
+
 
     /**
      * 通过ID查询单条数据

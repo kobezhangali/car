@@ -19,6 +19,11 @@ public class SysCityServiceImpl implements SysCityService {
     @Resource
     private SysCityDao sysCityDao;
 
+    @Override
+    public List<SysCity> queryAll(SysCity sysCity) {
+        return this.sysCityDao.queryAll(sysCity);
+    }
+
     /**
      * 通过ID查询单条数据
      *
@@ -30,19 +35,6 @@ public class SysCityServiceImpl implements SysCityService {
         return this.sysCityDao.queryById(cityid);
     }
 
-    public List<SysCity> queryCart() {
-        return this.sysCityDao.queryCart();
-    }
-
-    @Override
-    public List<SysCity> queryCartByPid(int cityid) {
-        return this.sysCityDao.queryCartByPid(cityid);
-    }
-
-    @Override
-    public List<SysCity> queryCartAddressByCityid(int cityid) {
-        return this.sysCityDao.queryCartAddressByCityid(cityid);
-    }
 
     /**
      * 查询多条数据

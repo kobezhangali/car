@@ -120,7 +120,7 @@
                         </div>
 
                         <div class="itemBtn left">
-                            <button class="butt"  @click="selectCar(site.id)">预定</button>
+                            <button class="butt"  @click="selectCar(site.carid)">预定</button>
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                         </div>
 
                         <div class="itemBtn left">
-                            <button class="butt" @click="selectCar(site.id)" >预定</button>
+                            <button class="butt" @click="selectCar(site.carid)" >预定</button>
                         </div>
                     </div>
                 </div>
@@ -201,6 +201,11 @@
             cars : [],
         },
 
+        methods:{
+            selectCar:function (id) {
+                window.location.href="../order/ordersubmit.html"+getid +"&cid=" +id;
+            }
+        },
     });
 
 </script>
@@ -210,13 +215,14 @@
         var getid = window.location.search;
         $.ajax({
         type:"get",
-        url:"/carsys/city/citys.do"+getid,
+        url:"/sysCity/selectOne"+getid,
             dataType:"json",
             success:function(data){
-                if(data.code==1) {
-                 var infos = data.info;
-                 var get = infos.getCity;
-                 var back = infos.backCity;
+
+                if(data.code==0) {
+                 var infos = data.data;
+                 var get = infos[0];
+                 var back = infos[1];
                  vm.getcitys = get.name;
                  vm.backcitys = back.name;
             }
@@ -235,13 +241,14 @@
         var getid = window.location.search;
         $.ajax({
             type:"get",
-            url:"/carsys/car/price.do"+getid,
+            url:"/sysCar/ascCar",
             dataType:"json",
             success:function(data){
-                if(data.code==1) {
-                    vm2.sites = data.info;
+                // if(data.code==1) {
 
-                }
+                    vm2.sites = data;
+
+                // }
             },
             error : function(){
                 alert("ajax加载失败");
@@ -257,13 +264,13 @@
         var getid = window.location.search;
         $.ajax({
             type:"get",
-            url:"/carsys/car/number.do"+getid,
+            url:"/sysCar/descCar",
             dataType:"json",
             success:function(data){
-                if(data.code==1) {
-                    vm3.cars = data.info;
+                // if(data.code==1) {
+                    vm3.cars = data;
 
-                }
+                // }
             },
             error : function(){
                 alert("ajax加载失败");

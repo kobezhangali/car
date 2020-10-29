@@ -12,6 +12,9 @@ import java.util.List;
  */
 public interface SysCityService {
 
+
+    List<SysCity> queryAll(SysCity sysCity);
+
     /**
      * 通过ID查询单条数据
      *
@@ -19,12 +22,6 @@ public interface SysCityService {
      * @return 实例对象
      */
     SysCity queryById(Integer cityid);
-
-    List<SysCity> queryCart();
-
-    List<SysCity> queryCartByPid(int cityid);
-
-    List<SysCity> queryCartAddressByCityid(int cityid);
 
     /**
      * 查询多条数据

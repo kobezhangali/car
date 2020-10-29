@@ -132,13 +132,13 @@
 				var getid = window.location.search;
 				$.ajax({
 					type: "get",
-					url: "/carsys/city/citys.do" + getid,
+					url: "/sysCity/selectOne" + getid,
 					dataType: "json",
 					success: function(data) {
-						if (data.code == 1) {
-							var infos = data.info;
-							vm.getcitys = infos.getCity;
-							vm.backcitys = infos.backCity;
+						if (data.code == 0) {
+							var infos = data.data;
+							vm.getcitys = infos[0];
+							vm.backcitys = infos[1];
 						}
 					},
 					error: function() {
@@ -155,16 +155,17 @@
 				var getid = window.location.search;
 				$.ajax({
 					type: "get",
-					url: "/carsys/car/findcar.do" + getid,
+					url: "/sysCar/selectOne"+ getid,
 					dataType: "json",
 					success: function(data) {
-						if (data.code == 1) {
-							vm.infos = data.info;
-						}
+						// if (data.code == 0) {
+							vm.infos = data;
+						// }
 					},
 					error: function() {
 						alert("ajax加载失败");
 					}
+
 
 				})
 			})

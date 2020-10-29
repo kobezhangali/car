@@ -29,6 +29,14 @@
         limit #{offset}, #{limit}
     </select>
 
+    <select id="ascCar" resultMap="SysCarMap">
+        select * from sys_car ORDER BY price ASC
+    </select>
+
+    <select id="descCar" resultMap="SysCarMap">
+        select * from sys_car ORDER BY price desc
+    </select>
+
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="SysCarMap">
         select

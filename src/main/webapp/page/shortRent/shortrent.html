@@ -158,14 +158,14 @@
     function loadfirst(pid){
         $.ajax({
             type:"post",
-            url:"http://localhost:8080/sysCity/selectAll?pid="+pid,
+            url:"/sysCity/selectAll?pid="+pid,
             dataType:"json",
             success:function(data){
                 //id为0时为父类
                 if(pid==0){
-                    vm.mcs=data.data;
+                    vm.mcs=data;
                 }else{
-                    vm2.citys = data.data;
+                    vm2.citys = data;
                 }
             }
         });
@@ -206,14 +206,14 @@
     function load(pid){
         $.ajax({
             type:"post",
-            url:"http://localhost:8080/sysCity/selectAll?pid="+pid,
+            url:"/sysCity/selectAll?pid="+pid,
             dataType:"json",
             success:function(data){
                 //id为0时为父类
                 if(pid==0){
-                    vm3.mcs=data.data;
+                    vm3.mcs=data;
                 }else{
-                    vm4.citys=data.data;
+                    vm4.citys=data;
                 }
             }
         });
