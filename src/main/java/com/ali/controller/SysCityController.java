@@ -39,11 +39,11 @@ public class SysCityController {
         return this.sysCityService.queryCart();
     }
 
-    @GetMapping("queryCartByPid")
-    public List<SysCity> queryCartByPid(int cityid) {
-        System.out.println("111111111111111");
-        System.out.println(cityid);
-        return this.sysCityService.queryCartByPid(cityid);
+    @PostMapping(value = "queryCartByPid")
+    public List<SysCity> queryCartByPid(int pid) {
+        System.out.println(pid);
+
+        return this.sysCityService.queryCartByPid(pid);
     }
 
     @GetMapping("queryCartAddressByCityid")

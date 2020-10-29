@@ -22,7 +22,7 @@ public interface SysCityService {
 
     List<SysCity> queryCart();
 
-    List<SysCity> queryCartByPid(int cityid);
+    List<SysCity> queryCartByPid(int pid);
 
     List<SysCity> queryCartAddressByCityid(int cityid);
 

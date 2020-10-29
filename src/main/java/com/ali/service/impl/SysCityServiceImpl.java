@@ -35,8 +35,8 @@ public class SysCityServiceImpl implements SysCityService {
     }
 
     @Override
-    public List<SysCity> queryCartByPid(int cityid) {
-        return this.sysCityDao.queryCartByPid(cityid);
+    public List<SysCity> queryCartByPid(int pid) {
+        return this.sysCityDao.queryCartByPid(pid);
     }
 
     @Override
