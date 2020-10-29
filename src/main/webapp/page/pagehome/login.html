@@ -131,20 +131,24 @@
         //监听提交
         form.on('submit(formDemo)', function(dt){
             $.ajax({
-                url:"/carsys/user/login.do",
+                url:"http://localhost:8081/MySSM_war/sysUser/login",
                 type:"post",
                 data:$("form").serialize(),
                 dataType:'json',
                 success:function(obj) {
-                    console.log(obj.code);
-                    if(obj.code == 1) {
-                        window.location.href="loginsuccess.html";
+                   /* alert(obj.code);*/
+                    /*alert(obj.tel);*/
+                    /*console.log(obj.data);*/
+                    /*console.log(obj.code);*/
+                    if(obj!=null) {
+                        window.location.href="loginsuccess.html?tel="+obj.tel;
                     }else {
-                        layer.alert(obj.info);
+                        layer.alert("账号或密码错误");
                     }
                 },
                 error:function(){
-                    layer.alert("ajax错误");
+
+                    layer.alert("AJAX失败");
                 }
             });
             return false;

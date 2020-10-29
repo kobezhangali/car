@@ -17,6 +17,20 @@
         from car.sys_user
         where uid = #{uid}
     </select>
+    <!--根据tel查询user-->
+    <select id="getUserByTel" resultMap="SysUserMap">
+        select
+          uid, tel, password, email, invitation
+        from car.sys_user
+        where tel = #{tel}
+    </select>
+    <!--查询全部-->
+    <select id="getAllUser" resultMap="SysUserMap">
+        select
+          uid, tel, password, email, invitation
+        from car.sys_user
+    </select>
+
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="SysUserMap">

@@ -130,20 +130,17 @@
         //监听提交
         form.on('submit(demo1)', function(data){
             $.ajax({
-                url:"/carsys/user/register.do",
+                url:"http://localhost:8081/MySSM_war/sysUser/regist",
                 type:"post",
                 data:$("form").serialize(),
                 dataType:'json',
                 success:function(res) {
-                    if(res.code == 1) {
-                        alert("注册成功！");
-                        window.location.href=("login.html");
-                    } else {
-                        layer.alert(res.info);
-                    }
+                    console.log(data);
+                    alert("注册成功！");
+                    window.location.href=("login.html");
                 },
                 error: function() {
-                    elert("ajax错误");
+                    alert("注册失败");
                 }
             });
             return false;

@@ -21,6 +21,16 @@ public class SysUser implements Serializable {
 
     private String invitation;
 
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "uid=" + uid +
+                ", tel='" + tel + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", invitation='" + invitation + '\'' +
+                '}';
+    }
 
     public Integer getUid() {
         return uid;

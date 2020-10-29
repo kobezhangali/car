@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * (SysUser)表控制层
@@ -16,7 +15,9 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("sysUser")
-public class SysUserController {
+@CrossOrigin
+@SessionAttributes("Save")
+class SysUserController {
     /**
      * 服务对象
      */
@@ -31,13 +32,17 @@ public class SysUserController {
      */
     @GetMapping("selectOne/{id}")
     public SysUser selectOne(@PathVariable("id") Integer id) {
+        System.out.println("00000000");
         return this.sysUserService.queryById(id);
     }
     /**
      * 通过tel查询user
      */
-    @GetMapping("selectByTel/{tel}")
+    @GetMapping("selectByTel")
     public SysUser selectByTel(String tel){
+        System.out.println(tel);
+        System.out.println("00000000");
+        System.out.println(sysUserService.getUserByTel(tel));
         return this.sysUserService.getUserByTel(tel);
     }
 
@@ -55,27 +60,26 @@ public class SysUserController {
     }*/
     @PostMapping("regist")
     public HashMap<String,Object> regist(SysUser user){
-        List<SysUser> list =sysUserService.getAllUser();
         HashMap<String,Object> map=new HashMap<>();
-        for (SysUser sysUser : list) {
-            if(!((sysUser.getTel()).equalsIgnoreCase(user.getTel()))){
-                map.put("code", 0);
-                map.put("count", 1000);
-                map.put("msg", "");
-                map.put("data", user);
-
-            }
+        SysUser users=this.sysUserService.getUserByTel(user.getTel());
+        if(users==null){
+            this.sysUserService.insert(user);
+            map.put("code", 0);
+            map.put("count", 1000);
+            map.put("msg", "");
+            map.put("data", user);
+            return map;
+        }else{
+            return null;
         }
-        this.sysUserService.insert(user);
-        return map;
-    }
-    @PostMapping("login")
 
+    }
+    /*@PostMapping("login")
     public HashMap<String,Object> login(String tel,String password){
 
         SysUser users=this.sysUserService.getUserByTel(tel);
-        /*System.out.println(tel);
-        System.out.println(password);*/
+        *//*System.out.println(tel);
+        System.out.println(password);*//*
         HashMap<String,Object> map=new HashMap<>();
 
         if(users!=null) {
@@ -84,15 +88,18 @@ public class SysUserController {
                 map.put("count", 1000);
                 map.put("msg", "");
                 map.put("data", users);
-                /*return map;*/
+                *//*return map;*//*
             }
         }return map;
-    }
-    /* @PostMapping("login")
-     public SysUser login(SysUser user){
+    }*/
+     @PostMapping("login")
+
+     public SysUser login (SysUser user){
      SysUser users=this.sysUserService.getUserByTel(user.getTel());
          if(users!=null){
              if((users.getPassword()).equalsIgnoreCase(user.getPassword())){
+
+
                  return users;
              }else {
                  return users;
@@ -100,7 +107,7 @@ public class SysUserController {
          }else {
              return users;
          }
-     }*/
+     }
     @PostMapping("update")
     public SysUser upDate(SysUser user){
         return this.sysUserService.update(user);
