@@ -16,6 +16,19 @@
         where cityid = #{cityid}
     </select>
 
+    <select id="queryCart" resultMap="SysCityMap">
+        select * from car.sys_city where pid=0
+    </select>
+
+    <select id="queryCartByPid" resultMap="SysCityMap">
+        select * from car.sys_city where pid=#{pid}
+    </select>
+
+    <select id="queryCartAddressByCityid" resultMap="SysCityMap">
+        select c.cityid,c.name cname,a.name address,a.cityid pid from (select * from sys_city where pid=0) c ,(select * from sys_city where pid!=0) a
+        where c.cityid=a.pid and c.cityid=#{cityid}
+    </select>
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="SysCityMap">
         select
