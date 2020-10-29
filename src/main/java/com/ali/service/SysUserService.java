@@ -19,7 +19,11 @@ public interface SysUserService {
      * @return 实例对象
      */
     SysUser queryById(Integer uid);
+    //根据tel查询user
+    SysUser getUserByTel(String tel);
 
+    //查询全部user
+    List<SysUser> getAllUser();
     /**
      * 查询多条数据
      *
@@ -36,6 +40,8 @@ public interface SysUserService {
      * @return 实例对象
      */
     SysUser insert(SysUser sysUser);
+
+
 
     /**
      * 修改数据

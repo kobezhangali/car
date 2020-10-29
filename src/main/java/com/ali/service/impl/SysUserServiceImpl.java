@@ -30,6 +30,16 @@ public class SysUserServiceImpl implements SysUserService {
         return this.sysUserDao.queryById(uid);
     }
 
+    @Override
+    public SysUser getUserByTel(String tel) {
+        return this.sysUserDao.getUserByTel(tel);
+    }
+
+    @Override
+    public List<SysUser> getAllUser() {
+        return sysUserDao.getAllUser();
+    }
+
     /**
      * 查询多条数据
      *
@@ -53,6 +63,8 @@ public class SysUserServiceImpl implements SysUserService {
         this.sysUserDao.insert(sysUser);
         return sysUser;
     }
+
+
 
     /**
      * 修改数据
