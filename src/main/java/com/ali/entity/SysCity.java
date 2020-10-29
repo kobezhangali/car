@@ -42,4 +42,12 @@ public class SysCity implements Serializable {
         this.pid = pid;
     }
 
+    @Override
+    public String toString() {
+        return "SysCity{" +
+                "cityid=" + cityid +
+                ", name='" + name + '\'' +
+                ", pid=" + pid +
+                '}';
+    }
 }
