@@ -30,6 +30,20 @@ public class SysCityServiceImpl implements SysCityService {
         return this.sysCityDao.queryById(cityid);
     }
 
+    public List<SysCity> queryCart() {
+        return this.sysCityDao.queryCart();
+    }
+
+    @Override
+    public List<SysCity> queryCartByPid(int cityid) {
+        return this.sysCityDao.queryCartByPid(cityid);
+    }
+
+    @Override
+    public List<SysCity> queryCartAddressByCityid(int cityid) {
+        return this.sysCityDao.queryCartAddressByCityid(cityid);
+    }
+
     /**
      * 查询多条数据
      *

@@ -20,6 +20,12 @@ public interface SysCityService {
      */
     SysCity queryById(Integer cityid);
 
+    List<SysCity> queryCart();
+
+    List<SysCity> queryCartByPid(int cityid);
+
+    List<SysCity> queryCartAddressByCityid(int cityid);
+
     /**
      * 查询多条数据
      *

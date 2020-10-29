@@ -21,6 +21,12 @@ public interface SysCityDao {
      */
     SysCity queryById(Integer cityid);
 
+    List<SysCity> queryCart();
+
+    List<SysCity> queryCartByPid(int cityid);
+
+    List<SysCity> queryCartAddressByCityid(int cityid);
+
     /**
      * 查询指定行数据
      *
