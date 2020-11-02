@@ -72,7 +72,7 @@
                         <a data-v-39f7f629="" href="https://www.chesudi.com/module/longRent.html" target="_blank" class="">企业长租</a>
                     </li>
                     <li data-v-39f7f629="">
-                        <a data-v-39f7f629="" href="../shortRent/shortrent.html" target="_self" class="">短租自驾</a>
+                        <a data-v-39f7f629="" href="" target="_self" onclick="tiao()" class="tiao">短租自驾</a>
                     </li>
                     <li data-v-39f7f629="">
                         <a data-v-39f7f629="" href="index.html" target="_self" class="colorRed">
@@ -502,7 +502,8 @@
     var vue=new Vue({
         el:"#app",
         data:{
-            id:[],
+            /*id:[],*/
+            tel:[],
 
         }
     });
@@ -517,6 +518,7 @@
       $(".user").html(tel);
     })*/
     var a=null;
+
     $(function (){
         $.ajax({
             url: "http://localhost:8081/MySSM_war/sysUser/selectByTel?tel="+tel,
@@ -527,7 +529,6 @@
                 /*alert(obj.email);*/
                 $(".user").html(obj.tel);
                 a=obj.uid;
-
                 vue.id=obj.uid;
             }
         })
@@ -537,8 +538,9 @@
        /* alert(a);*/
         window.location.href="../mymain/mymain.html?uid="+a;
     }
-
-
+    function tiao() {
+        $(".tiao").attr("href","../shortRent/shortrent.html?uid="+a+"&tel="+tel);
+    }
 </script>
 
 </body>

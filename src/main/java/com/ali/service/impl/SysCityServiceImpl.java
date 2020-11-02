@@ -24,6 +24,16 @@ public class SysCityServiceImpl implements SysCityService {
         return this.sysCityDao.queryAll(sysCity);
     }
 
+    @Override
+    public SysCity getcity() {
+        return this.sysCityDao.getcity();
+    }
+
+    @Override
+    public List<SysCity> queryByPid(int pid) {
+        return this.sysCityDao.queryByPid(pid);
+    }
+
     /**
      * 通过ID查询单条数据
      *

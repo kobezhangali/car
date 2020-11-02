@@ -68,12 +68,12 @@
 						<div class="selCarMsg">
 							<div class="selCarMsgCom">
 								<div class="MsgTit">取车</div>
-								<div class="Msg">取车地址：{{getcitys.name}}</div>
+								<div class="Msg">取车地址：{{getcitys}}</div>
 							</div>
 
 							<div class="selCarMsgCom">
 								<div class="MsgTit">还车</div>
-								<div class="Msg">还车地址：{{backcitys.name}}</div>
+								<div class="Msg">还车地址：{{backcitys}}</div>
 							</div>
 						</div>
 					</div>
@@ -132,13 +132,13 @@
 				var getid = window.location.search;
 				$.ajax({
 					type: "get",
-					url: "/sysCity/selectOne" + getid,
+					url: "http://localhost:8081/MySSM_war/sysCity/selectOne"+getid,
 					dataType: "json",
 					success: function(data) {
 						if (data.code == 0) {
-							var infos = data.data;
-							vm.getcitys = infos[0];
-							vm.backcitys = infos[1];
+							// var infos = data.data;
+							vm.getcitys = data.data[0].name;
+							vm.backcitys = data.data[1].name;
 						}
 					},
 					error: function() {
@@ -155,12 +155,12 @@
 				var getid = window.location.search;
 				$.ajax({
 					type: "get",
-					url: "/sysCar/selectOne"+ getid,
+					url: "http://localhost:8081/MySSM_war/sysCar/selectOne"+ getid,
 					dataType: "json",
 					success: function(data) {
-						// if (data.code == 0) {
-							vm.infos = data;
-						// }
+						 if (data.code == 0) {
+							vm.infos = data.data;
+						 }
 					},
 					error: function() {
 						alert("ajax加载失败");
@@ -175,14 +175,15 @@
 		<script type="text/javascript">
 			function submitorder() {
 				var id = window.location.search;
-				var total = $("#total").html();
+				alert(id);
+				var oprice = $("#total").html();
 				$.ajax({
-					type: "get",
-					url: "/carsys/order/add.do" + id + "&oprice=" + total,
+					type: "post",
+					url: "http://localhost:8081/MySSM_war/sysOrder/add" + id + "&oprice=" + oprice,
 					dataType: "json",
 					success: function(data) {
-						alert(data.info);
-						window.location.href = "../mymain/mymain.html";
+						alert("提交成功");
+						window.location.href = "../mymain/mymain.html"+id;
 					},
 					error: function() {
 						alert("ajax加载失败");

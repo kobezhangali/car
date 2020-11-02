@@ -24,6 +24,16 @@ public class SysCityController {
      */
     @Resource
     private SysCityService sysCityService;
+    @GetMapping("getCityByPid")
+    public HashMap<String,Object> getCityByPid(int pid){
+        List<SysCity> city=this.sysCityService.queryByPid(pid);
+        HashMap<String,Object> map=new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("count", 1000);
+        map.put("msg", "");
+        map.put("info",city);
+        return map;
+    }
 
 
     @GetMapping("selectOne")

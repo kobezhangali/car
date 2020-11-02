@@ -25,9 +25,10 @@
 
                 <label data-v-67ef3a4a v-if="denglu">
                     <a data-v-67ef3a4a href="#">你好，</a>
-                    <a data-v-67ef3a4a href="#" class="colorRed">/</a>
+                    <a data-v-67ef3a4a href="javascript:void" class="user">{{tel}}</a>
                     <a data-v-67ef3a4a href="../pagehome/index.html" class="colorRed" style="margin-right: 10px;">[退出]</a>
                 </label>
+
 
 
                 <a data-v-67ef3a4a="" href="#mobileZuChe">手机租车</a>
@@ -151,21 +152,22 @@
         loadfirst(0);
     });
 
-    function sub(cityid){
+    /*function sub(cityid){
         loadfirst(cityid);
-    }
+    }*/
 
     function loadfirst(pid){
+
         $.ajax({
-            type:"post",
-            url:"/sysCity/selectAll?pid="+pid,
+            type:"get",
+            url:"http://localhost:8081/MySSM_war/sysCity/getCityByPid?pid="+pid,
             dataType:"json",
             success:function(data){
                 //id为0时为父类
                 if(pid==0){
-                    vm.mcs=data;
+                    vm.mcs=data.info;
                 }else{
-                    vm2.citys = data;
+                    vm2.citys =data.info;
                 }
             }
         });
@@ -193,8 +195,22 @@
         },
     });
 
+    var id=window.location.search;
 
+    /*$ (function (){
 
+        var aaa=window.location.search;
+
+        var urlList = aaa.split('=');
+        var uid = urlList[urlList.length-1].split('.')[0];
+        id=uid;
+        /!* alert(uid);*!/
+    })*/
+
+    /*$(function () {
+      var uid= window.location.search;
+
+    })*/
     $(function(){
         load(0);
     });
@@ -204,16 +220,17 @@
     }
 
     function load(pid){
+
         $.ajax({
-            type:"post",
-            url:"/sysCity/selectAll?pid="+pid,
+            type:"get",
+            url:"http://localhost:8081/MySSM_war/sysCity/getCityByPid?pid="+pid,
             dataType:"json",
             success:function(data){
                 //id为0时为父类
                 if(pid==0){
-                    vm3.mcs=data;
+                    vm3.mcs=data.info;
                 }else{
-                    vm4.citys=data;
+                    vm4.citys=data.info;
                 }
             }
         });
@@ -226,17 +243,28 @@
 </script>
 
 <script type="text/javascript">
+    var id=window.location.search;
 
     function selectCar() {
         var getid = $("#bmsel").val();
         var backid = $("#hcs").val();
-        window.location.href="shortsort.html?getid="+getid+"&backid="+backid;
+        window.location.href="shortsort.html"+id+"&getid="+getid+"&backid="+backid;
 
         }
 
 </script>
 
 <script type="text/javascript">
+    var vm6=new Vue({
+        el:'.user',
+        data:{
+            tel: '',
+        },
+    })
+    var id=window.location.search;
+
+    var utel=id.substring(1,4);
+
     var vm5 = new Vue({
         el:'#daohang',
         data:{
@@ -248,7 +276,24 @@
     });
 
     $(function () {
-        $.ajax({
+
+        if(utel=="uid"){
+
+            vm5.denglu=true;
+
+            vm5.weidenglu=false;
+        }else {
+            vm5.denglu = false;
+            vm5.weidenglu = true;
+        }
+        $ (function (){
+            var aaa=window.location.search;
+            var urlList = aaa.split('=');
+            var tel = urlList[urlList.length-1].split('.')[0];
+            $(".user").html(tel);
+
+        })
+        /*$.ajax({
             type:"post",
             url:"/carsys/user/denglu.do",
             dataType:"json",
@@ -262,7 +307,7 @@
                     vm5.weidenglu=true;
                 }
             }
-        });
+        });*/
     })
 
 </script>

@@ -15,6 +15,20 @@
         from car.sys_city
         where cityid = #{cityid}
     </select>
+    <!--通过pid查询城市-->
+    <select id="queryByPid" resultMap="SysCityMap">
+        select
+          cityid, name, pid
+        from car.sys_city
+        where pid=#{pid}
+    </select>
+    <!--查询城市-->
+    <select id="getcity" resultMap="SysCityMap">
+        select
+          cityid, name, pid
+        from car.sys_city
+        where pid=0
+    </select>
 
 
     <!--查询指定行数据-->
@@ -85,5 +99,7 @@
     <delete id="deleteById">
         delete from car.sys_city where cityid = #{cityid}
     </delete>
+
+
 
 </mapper>

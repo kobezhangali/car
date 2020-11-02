@@ -16,6 +16,7 @@ import java.util.List;
  */
 @Service("sysUserService")
 public class SysUserServiceImpl implements SysUserService {
+
     @Resource
     private SysUserDao sysUserDao;
 

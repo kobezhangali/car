@@ -20,6 +20,10 @@ public interface SysCityDao {
      * @return 实例对象
      */
     SysCity queryById(Integer cityid);
+    /*查询城市*/
+    SysCity getcity();
+    /*通过pid查询城市*/
+    List<SysCity> queryByPid(int pid);
 
 
     /**

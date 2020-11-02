@@ -27,7 +27,7 @@
                 <i data-v-95ac8d30="" class="iconfont icon-phone"></i>
             <span data-v-95ac8d30="" class="sp1">400-919-8000</span>
             <span data-v-95ac8d30="" class="sp2">欢迎您，</span>
-                <span data-v-95ac8d30="" class="sp4">欢迎您，</span>
+                <span data-v-95ac8d30="" class="sp4">{{obj}}</span>
             <span data-v-95ac8d30="" class="sp3"></span>
         </div>
         </div>
@@ -48,10 +48,12 @@
                         </dl>
                         <ul data-v-1cae2c34="" class="manNav">
                             <li data-v-1cae2c34="">
-                                <a data-v-1cae2c34="" href="orderManage.html" class="sel">订单管理</a>
+                                <!--<a data-v-1cae2c34="" href="orderManage.html" class="sel">订单管理</a>-->
+                                <button onclick="submitForm()">订单管理</button>
                             </li>
                              <li data-v-1cae2c34="">
-                                 <a data-v-1cae2c34="" href="myinfo.html" class="">个人信息</a>
+                                 <button onclick="users()">个人信息</button>
+                                 <!--<a data-v-1cae2c34="" href="myinfo.html" class="">个人信息</a>-->
                              </li>
                         </ul>
                     </div>
@@ -84,11 +86,12 @@
                                         <tr class="firstTr" v-for="site in obj">
                                             <td>{{site.oid}}</td>
                                             <td>{{site.oprice}}</td>
-                                            <td>{{site.cname}}</td>
-                                            <td>{{site.getcity}}</td>
-                                            <td>{{site.backcity}}</td>
-                                            <td>{{site.ostatus}}</td>
-                                            <td><a href="#" style="color:red">删除</a></td>
+                                            <td>{{site.name}}</td>
+                                            <td>{{site.getname}}</td>
+                                            <td>{{site.backname}}</td>
+                                            <td>{{site.status}}</td>
+                                            <td><button class="layui-btn layui-btn-danger layui-btn-xs" @click="del(site.oid)">删除</button></td>
+                                            <!--<td><a href="" style="color:red" @click="del(site.oid)">删除</a></td>-->
                                         </tr>
                                     </table>
 
@@ -112,32 +115,57 @@
    </div>
 
 <script type="text/javascript">
-
-
-
+    var id=window.location.search;
+    var aaa=window.location.search;
+    var urlList = aaa.split('=');
+    var uid = urlList[urlList.length-1].split('.')[0];
+    $(".sp4").html(uid);
+    
     var totalCount;
-
     var vm = new Vue({
         el:'#noda',
         data:{
             obj:[],
         },
+        methods:{
+            del:function (oid){
+                alert("确定删除吗")
+                window.location.href="http://localhost:8081/MySSM_war/sysOrder/delOrder?oid="+oid+"&uid="+id;
+            }
+        },
     });
+
+    /*var uid=window.location.search;*/
+    /*$ (function (){
+        var aaa=window.location.search;
+        var urlList = aaa.split('=');
+        var uid = urlList[urlList.length-1].split('.')[0];
+        $(".sp4").html(uid);
+        id=uid;
+        console.log(uid);
+        alert(uid);
+    })*/
+
 
     $(function () {
         loadData(1);
     })
     function loadData(page) {
+
         $.ajax({
             type:"get",
-            url:"/carsys/order/all.do?page="+page,
+            url:"http://localhost:8081/MySSM_war/orders/getOrder"+id,
+          /*  url:"/carsys/order/all.do?page="+page,*/
             dataType:"json",
             async: false,
             success:function(data){
-                //id为0时为父类
-                if(data.code==1){
-                    totalCount = data.info.total;
-                    vm.obj=data.info.rows;
+
+                if(data.code==0){
+                    /*totalCount = data.info.total;
+                    vm.obj=data.info.rows;*/
+                    totalCount = data.info;
+                    vm.obj=data.info;
+
                 } else{
                     alert(data.info);
                 }
@@ -147,9 +175,34 @@
             }
         })
     }
+    /*function del(oid){
+        alert("是否确定删除");
+        $.ajax({
+            type:"get",
+            url:"http://localhost:8081/MySSM_war/sysOrder/delOrder?oid="+oid,
+            /!*  url:"/carsys/order/all.do?page="+page,*!/
+            dataType:"json",
+            async: false,
+            success:function(data){
+                //id为0时为父类
+                if(data==1){
+                    /!*totalCount = data.info.total;
+                    vm.obj=data.info.rows;*!/
+                    window.location.href="../mymain/mymain.html";
+                    totalCount = data.info;
+                    vm.obj=data.info;
+                } else{
+                    alert(data.info);
+                }
+            },
+            error:function () {
+                alert("ajax加载错误");
+            }
+        })
+    }*/
 
 
-    layui.use(['laypage', 'layer'], function() {
+    /*layui.use(['laypage', 'layer'], function() {
         var laypage = layui.laypage
             , layer = layui.layer;
 
@@ -159,29 +212,28 @@
             , count: totalCount //数据总数
             , limit:5
             , jump: function (obj, first) {
-                /*console.log(obj)*/
+                /!*console.log(obj)*!/
                 var currentPage = obj.curr;
 
                 loadData(currentPage);
-
             }
         });
 
-    });
+    });*/
 </script>
 <script>
-    /*var aaa=window.location.search;
-    var urlList = aaa.split('=');
-    var tel = urlList[urlList.length-1].split('.')[0];*/
-    $ (function (){
-        var aaa=window.location.search;
+    var a=window.location.search;
+    function submitForm(){
+        /*alert("aaaa");*/
+        /* alert(a);*/
+        location.reload();
+       /* window.location.href="../mymain/mymain.html?uid="+a;*/
+    }
 
-        var urlList = aaa.split('=');
-        var uid = urlList[urlList.length-1].split('.')[0];
-        $(".sp4").html(uid);
-        console.log(uid);
-        alert(uid);
-    })
+    function users(){
+        window.location.href="../mymain/myinfo.html"+a;
+    }
+
 </script>
 
 </body>

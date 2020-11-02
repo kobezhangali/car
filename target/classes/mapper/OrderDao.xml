@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ali.dao.OrderShowDao">
+    <select id="getorderShow" resultType="com.ali.entity.Order">
+   select m.oid,m.oprice,sys_car.name,m.name as getname,sys_city.name as backname,m.status from
+(select sys_user.uid,sys_order.oid,sys_order.oprice,sys_order.carid,sys_order.backid,sys_city.name,sys_order.status from
+car.sys_order inner join car.sys_city on sys_order.getid=sys_city.cityid
+inner join car.sys_car on sys_car.carid=sys_order.carid
+inner join car.sys_user on sys_order.uid=sys_user.uid where sys_user.uid=#{uid})
+as m inner join car.sys_city on m.backid=sys_city.cityid
+inner join car.sys_car on sys_car.carid=m.carid
+inner join car.sys_user on m.uid=sys_user.uid where sys_user.uid=#{uid}
+</select>
+
+</mapper>

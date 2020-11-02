@@ -47,7 +47,8 @@
                         </dl>
                         <ul data-v-1cae2c34="" class="manNav">
                             <li data-v-1cae2c34="">
-                                <a data-v-1cae2c34="" href="mymain.html" class="">订单管理</a>
+                                <!--<a data-v-1cae2c34="" href="mymain.html" class="">订单管理</a>-->
+                                <button onclick="orders()">订单管理</button>
                             </li>
                             <li data-v-1cae2c34="">
                                 <a data-v-1cae2c34="" href="myinfo.html" class="sel">个人信息</a>
@@ -70,12 +71,12 @@
                                         </tr>
                                         <tr>
                                             <td>邮箱：{{email}}</td>
-                                            <td><a href="#" style="color: orangered">修改</a></td>
+                                            <td><button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">修改</button></td>
                                         </tr>
                                         <tr>
-                                            <td></td>
+                                            <td>密码: {{password}}</td>
                                             <td>
-                                                <a href="#" style="color: orangered">修改密码</a>
+                                            <td><button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">修改</button></td>
                                             </td>
                                         </tr>
                                     </table>
@@ -94,24 +95,30 @@
 </div>
 
 <script type="text/javascript">
+    var uid=window.location.search;
     var vm = new Vue({
         el:'#noda',
         data:{
             tel:'',
-            email:''
+            email:'',
+            password:''
         },
     });
 
     $(function () {
+
+
         $.ajax({
             type:"get",
-            url:"/carsys/user/denglu.do",
+            url:"http://localhost:8081/MySSM_war/sysUser/selectOne"+uid,
             dataType:"json",
             success:function(data){
-                //id为0时为父类
-                if(data.code==1){
-                    vm.tel = data.info.tel;
-                    vm.email=data.info.email;
+
+                if(data!=null){
+
+                    vm.tel = data.tel;
+                    vm.email=data.email;
+                    vm.password=data.password;
                 }
             }
         });
@@ -144,16 +151,17 @@
                     ,shade: 0 //不显示遮罩
                     ,yes: function(){
                         $.ajax({
-                            url:"/carsys/user/update.do",
+                            url:"http://localhost:8081/MySSM_war/sysUser/upDate",
                             type:"post",
                             data:$("form").serialize(),
                             dataType:'json',
                             success:function(res) {
-                                if(res.code == 1) {
+                                if(res != 1) {
                                     alert("修改成功！");
-                                    window.location.href=("myinfo.html");
+                                    location.reload();
+
                                 } else {
-                                    layer.alert(res.info);
+                                    layer.alert("修改失败");
                                 }
                             },
                             error: function() {
@@ -175,6 +183,16 @@
         });
 
     });
+</script>
+<script>
+    var a=window.location.search;
+    function orders(){
+        /*alert("aaaa");*/
+        /* alert(a);*/
+        /*location.reload();*/
+         window.location.href="../mymain/mymain.html"+a;
+    }
+
 </script>
 
 

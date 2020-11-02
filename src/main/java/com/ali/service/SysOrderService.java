@@ -1,5 +1,6 @@
 package com.ali.service;
 
+import com.ali.entity.Order;
 import com.ali.entity.SysOrder;
 
 import java.util.List;
@@ -52,5 +53,6 @@ public interface SysOrderService {
      * @return 是否成功
      */
     boolean deleteById(Integer oid);
+
 
 }

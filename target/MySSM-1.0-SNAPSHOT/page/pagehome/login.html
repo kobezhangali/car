@@ -136,10 +136,7 @@
                 data:$("form").serialize(),
                 dataType:'json',
                 success:function(obj) {
-                   /* alert(obj.code);*/
-                    /*alert(obj.tel);*/
-                    /*console.log(obj.data);*/
-                    /*console.log(obj.code);*/
+
                     if(obj!=null) {
                         window.location.href="loginsuccess.html?tel="+obj.tel;
                     }else {

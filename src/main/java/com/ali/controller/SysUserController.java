@@ -1,5 +1,6 @@
 package com.ali.controller;
 
+import com.ali.dao.SysUserDao;
 import com.ali.entity.SysUser;
 import com.ali.service.SysUserService;
 import org.springframework.web.bind.annotation.*;
@@ -24,25 +25,21 @@ class SysUserController {
     @Resource
     private SysUserService sysUserService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne/{id}")
-    public SysUser selectOne(@PathVariable("id") Integer id) {
-        System.out.println("00000000");
-        return this.sysUserService.queryById(id);
+
+    @GetMapping("selectOne")
+    public SysUser selectOne(Integer uid) {
+        System.out.println("uid");
+
+        return this.sysUserService.queryById(uid);
     }
     /**
      * 通过tel查询user
      */
     @GetMapping("selectByTel")
     public SysUser selectByTel(String tel){
-        System.out.println(tel);
-        System.out.println("00000000");
-        System.out.println(sysUserService.getUserByTel(tel));
+
+
+
         return this.sysUserService.getUserByTel(tel);
     }
 
@@ -60,7 +57,7 @@ class SysUserController {
     }*/
     @PostMapping("regist")
     public HashMap<String,Object> regist(SysUser user){
-        HashMap<String,Object> map=new HashMap<>();
+        HashMap<String,Object> map=new HashMap<String,Object>();
         SysUser users=this.sysUserService.getUserByTel(user.getTel());
         if(users==null){
             this.sysUserService.insert(user);
@@ -98,9 +95,7 @@ class SysUserController {
      SysUser users=this.sysUserService.getUserByTel(user.getTel());
          if(users!=null){
              if((users.getPassword()).equalsIgnoreCase(user.getPassword())){
-
-
-                 return users;
+               return users;
              }else {
                  return users;
              }

@@ -15,6 +15,12 @@ public interface SysCityService {
 
     List<SysCity> queryAll(SysCity sysCity);
 
+    /*查询城市*/
+    SysCity getcity();
+
+    /*通过pid查询城市*/
+    List<SysCity> queryByPid(int pid);
+
     /**
      * 通过ID查询单条数据
      *

@@ -29,22 +29,22 @@ public class SysCarController {
     /**
      * 通过主键查询单条数据
      *
-     * @param cid 主键
+     * @param carid 主键
      * @return 单条数据
      */
     @GetMapping("selectOne")
-    public SysCar selectOne(Integer cid) {
+    public Map<String,Object> selectOne(Integer carid) {
 
-//        SysCar sysCar = sysCarService.queryById(cid);
-//
-//        Map<String,Object> map = new HashMap<String,Object>();
-//
-//        map.put("code", 0);
-//        map.put("count", 1000);
-//        map.put("msg", "");
-//        map.put("data", sysCar);
+        SysCar sysCar = sysCarService.queryById(carid);
 
-        return this.sysCarService.queryById(cid);
+        Map<String,Object> map = new HashMap<String,Object>();
+
+        map.put("code", 0);
+        map.put("count", 1000);
+        map.put("msg", "");
+        map.put("data", sysCar);
+
+        return map;
     }
 
     @GetMapping("selectAll")
@@ -53,12 +53,25 @@ public class SysCarController {
     }
 
     @GetMapping("ascCar")
-    public List<SysCar> ascCar(){
-        return this.sysCarService.ascCar();
+    public HashMap<String,Object> ascCar(){
+        HashMap<String,Object> map = new HashMap<String, Object>();
+        List<SysCar> list= this.sysCarService.ascCar();
+        map.put("code", 0);
+        map.put("count", 1000);
+        map.put("msg", "");
+        map.put("data", list);
+        return map;
     }
 
     @GetMapping("descCar")
-    public List<SysCar> descCar(){
-        return this.sysCarService.descCar();
+    public HashMap<String,Object> descCar(){
+        HashMap<String,Object> map = new HashMap<String, Object>();
+        List<SysCar> list= this.sysCarService.descCar();
+        map.put("code", 0);
+        map.put("count", 1000);
+        map.put("msg", "");
+        map.put("data", list);
+        return map;
+
     }
 }
